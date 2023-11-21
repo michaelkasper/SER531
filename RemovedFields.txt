@@ -1,0 +1,7 @@
+'Is Highlight', 'Is Timeline Work', 'Is Public Domain', 'Gallery Number', 'Period', 
+'Dynasty', 'Reign', 'Portfolio', 'Constituent ID', 'Artist Prefix',
+'Artist Suffix', 'Artist Begin Date', 'Artist End Date', 'Artist Nationality', 'Artist Display Bio',
+'Artist Gender', 'Artist ULAN URL', 'Artist Wikidata URL', 'Medium', 'Dimensions', 
+'Credit Line', 'Locale', 'Locus', 'Excavation', 'River', 
+'Rights and Reproduction', 'Object Wikidata URL', 'Metadata', 'Repository', 'Tags', 
+'Tags AAT URL', 'Tags Wikidata URL'
