@@ -1,0 +1,24 @@
+export type CsvData = {
+    "Object Number": string;
+    "Object ID": string;
+    Department: string;
+    AccessionYear: string;
+    "Object Name": string;
+    Title: string;
+    Culture: string;
+    "Artist Role": string;
+    "Artist Display Name": string;
+    "Artist Alpha Sort": string;
+    "Object Date": string;
+    "Object Begin Date": string;
+    "Object End Date": string;
+    City: string;
+    State: string;
+    County: string;
+    Country: string;
+    Region: string;
+    Subregion: string;
+    Classification: string;
+    "Link Resource": string;
+    artUrl: string;
+};
