@@ -8,13 +8,14 @@ const stardogConnection = new Connection({
     endpoint: config.api_endpoint || '',
 });
 
-
-export function useStardog<R>(queryString: string) {
+export function useStardog<R>(queryString: string, pageSize = 50) {
     const [error, setError] = useState<any>(null);
+    const [hasMore, setHasMore] = useState<any>(true);
+    const [page, setPage] = useState<any>(0);
     const [results, setResults] = useState<Array<R>>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
-    useEffect(() => {
+    const doQuery = () => {
         setLoading(true);
         query.execute(
             stardogConnection,
@@ -22,9 +23,9 @@ export function useStardog<R>(queryString: string) {
             queryString,
             'application/sparql-results+json',
             {
-                limit: 10,
+                limit: pageSize,
                 reasoning: true,
-                offset: 0,
+                offset: page,
             }
         )
             .then((r) => {
@@ -32,8 +33,11 @@ export function useStardog<R>(queryString: string) {
                     return setError(r);
                 }
 
-                setResults(r.body.results.bindings);
+                if (r.body.results.bindings.length === false) {
+                    hasMore(false);
+                }
 
+                setResults([...results, ...r.body.results.bindings]);
             })
             .catch((err) => {
                 setError(err);
@@ -41,8 +45,29 @@ export function useStardog<R>(queryString: string) {
             .finally(() => {
                 setLoading(false);
             });
+    };
 
-    }, [queryString]);
+    const getNextPage = () => {
+        if (hasMore) {
+            setPage(page + 1);
+            doQuery();
+        }
+    };
 
-    return {results, loading, error};
+    useEffect(() => {
+        setResults([]);
+        setHasMore(true);
+        setError(null);
+        setPage(0);
+        doQuery();
+    }, [queryString, pageSize]);
+
+    return {
+        results,
+        loading,
+        error,
+        currentPage: (page + 1),
+        lastPage: hasMore ? (page + 2) : (page + 1),
+        getNextPage
+    };
 }

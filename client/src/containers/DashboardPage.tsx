@@ -2,6 +2,9 @@ import * as React from "react";
 import {makeStyles} from "tss-react/mui";
 import {useStardog} from "../hooks/useStardog";
 import {ResponseExample} from "../types/ResponsExample";
+import {IconButton, InputBase, Paper, Typography} from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
+import {SearchBar} from "../components/SearchBar";
 
 const useStyles = makeStyles()((theme) => ({
         root: {
@@ -9,7 +12,21 @@ const useStyles = makeStyles()((theme) => ({
             display: 'flex',
             flexDirection: "column",
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginTop: 200
+        },
+        header: {
+            marginBottom: 20
+        },
+        logo: {
+            padding: '3px 5px',
+            fontSize: '36px !important',
+            textAlign: 'center',
+        },
+        title: {
+            padding: '3px 5px',
+            textAlign: 'center',
+            maxWidth: 300
         }
     })
 );
@@ -17,13 +34,23 @@ const useStyles = makeStyles()((theme) => ({
 
 export const DashboardPage = () => {
     const {classes} = useStyles();
-    const {results} = useStardog<ResponseExample>('select distinct ?s ?p ?o where { ?s ?p ?o }');
-
-
-    console.log(results);
 
     return (
         <div className={classes.root}>
+
+
+            <div className={classes.header}>
+                <Typography className={classes.logo}>
+                    PR<strong>ONTO</strong>
+                </Typography>
+
+                <Typography className={classes.title}>
+                    Ontology driven art/museum database
+                </Typography>
+            </div>
+
+
+            <SearchBar/>
 
         </div>
     );

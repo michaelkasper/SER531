@@ -7,60 +7,43 @@ const useStyles = makeStyles()((theme) => ({
         root: {
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: 'left',
+            flexDirection: 'column',
+            padding: '0',
+            margin: '0',
         },
         bar: {
             backgroundColor: 'white'
         },
-        header: {
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'left',
-        },
         logo: {
-            padding: '0px 10px',
-            fontSize: '3rem !important',
-            backgroundColor: '#008CFF',
-            color: 'white'
+            padding: '3px 5px',
+            fontSize: '36px !important',
+            width: 200
         },
         title: {
-            padding: '12px 5px',
+            padding: '3px 5px',
             textAlign: 'left',
             maxWidth: 300,
             color: '#008CFF'
-        },
-        buttonWrapper: {
-            marginRight: 20
-        },
-        button: {
-            marginLeft: theme.spacing(1),
-        },
+        }
     })
 );
 
 export const Header: React.FC = () => {
     const {classes} = useStyles();
-    const navigate = useNavigate();
 
     return (
         <AppBar position="static" color={'inherit'}>
             <div className={classes.root}>
-
-                <div className={classes.header}>
+                <div>
                     <Typography className={classes.logo}>
-                        GROUP 14
-                    </Typography>
-
-                    <Typography className={classes.title}>
-                        Enriching online museum experiences utilizing ontology frameworks
+                        PR<strong>ONTO</strong>
                     </Typography>
                 </div>
 
-                <div className={classes.buttonWrapper}>
-                    <Button variant="outlined" color="primary" className={classes.button} onClick={() => navigate('/')}>
-                        Dashboard
-                    </Button>
-                </div>
+                <Typography className={classes.title}>
+                    Ontology driven art/museum database
+                </Typography>
             </div>
         </AppBar>
     );
