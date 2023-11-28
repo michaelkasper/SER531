@@ -20,11 +20,13 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
     "react-scripts": "^5.0.1",
+    "stardog": "^5.2.0",
     "tss-react": "^4.8.2",
     "typescript": "^4.9.5",
     "uuid": "^9.0.0"
   },
   "scripts": {
+    "local": "npm run start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test"
