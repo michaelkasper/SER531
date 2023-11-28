@@ -41,7 +41,7 @@ export const SearchPage = () => {
                 <SearchBar width={'100%'}/>
 
                 <button onClick={() => {
-                    if (islastPage) {
+                    if (!islastPage) {
                         getNextPage();
                     }
                 }}>Get next page
