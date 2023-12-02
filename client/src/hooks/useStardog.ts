@@ -25,7 +25,7 @@ export function useStardog<R>(queryString: string, pageSize = 50) {
             {
                 limit: pageSize,
                 reasoning: true,
-                offset: page,
+                offset: page
             }
         )
             .then((r) => {

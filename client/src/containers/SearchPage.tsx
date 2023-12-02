@@ -3,7 +3,7 @@ import {makeStyles} from "tss-react/mui";
 import {SearchBar} from "../components/SearchBar";
 import {useStardog} from "../hooks/useStardog";
 import {ResponseExample} from "../types/ResponsExample";
-import {useQuery} from "../hooks/useQuery";
+import {useUrlQuery} from "../hooks/useUrlQuery";
 
 
 const useStyles = makeStyles()((theme) => ({
@@ -22,23 +22,39 @@ const useStyles = makeStyles()((theme) => ({
 
 export const SearchPage = () => {
     const {classes} = useStyles();
-    const query = useQuery();
-    const searchString = query.get('q') || '';
+    const query = useUrlQuery();
+    const searchString = (query.get('q') || '').replace('"', '\"');
+
+    const stardogQuery = `
+        SELECT ?Artwork ?artworkTitle ?artworkImageURL ?mediaType ?dimension ?artworkCreationLocation
+        WHERE {
+            ?Artwork a :Artwork .
+            ?Artwork :artworkTitle ?artworkTitle .
+            ?Artwork :artworkImageURL ?artworkImageURL .
+            OPTIONAL { ?Artwork :dimension ?dimension } .
+            OPTIONAL { ?Artwork :mediaType ?mediaType } .
+            OPTIONAL { ?Artwork :artworkCreationLocation ?artworkCreationLocation } .
+            OPTIONAL { ?Artwork :artworkCurrentLocation ?artworkCurrentLocation } .
+            FILTER(REGEX(STR(?artworkTitle), "${searchString}", "i"))
+        }
+    `;
+
     const {
         results,
         getNextPage,
         currentPage,
         lastPage
-    } = useStardog<ResponseExample>('select distinct ?s ?p ?o where { ?s ?p ?o }');
+    } = useStardog<ResponseExample>(stardogQuery);
 
     const islastPage = currentPage === lastPage;
-
 
     return (
         <div className={classes.root}>
 
             <div className={classes.body}>
                 <SearchBar width={'100%'}/>
+
+                <pre>{JSON.stringify(results, null, 2)}</pre>
 
                 <button onClick={() => {
                     if (!islastPage) {

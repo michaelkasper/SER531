@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import * as React from "react";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useQuery} from "../hooks/useQuery";
+import {useUrlQuery} from "../hooks/useUrlQuery";
 
 type Props = {
     width?: number | string
@@ -11,15 +11,17 @@ type Props = {
 
 export const SearchBar = ({width = 600}: Props) => {
     const navigate = useNavigate();
-    const query = useQuery();
+    const query = useUrlQuery();
     const [searchString, setSearchString] = useState<string>(query.get('q') || '');
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
         setSearchString(e.target.value);
     }
 
-    const handleKeyPress = (event: KeyboardEvent) => {
-        if (event.key === 'Enter') {
+    const handleKeyPress = (e: KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
             doSearch();
         }
     }
