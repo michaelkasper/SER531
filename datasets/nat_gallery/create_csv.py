@@ -6,7 +6,6 @@ objects_path = 'data/opendata/data/objects.csv'
 published_images_path = 'data/opendata/data/published_images.csv'
 
 # read csv into dataframes
-# low_memory=False to address DtypeWarning
 constituents_df = pd.read_csv(constituents_path, low_memory=False)
 objects_df = pd.read_csv(objects_path, low_memory=False)
 published_images_df = pd.read_csv(published_images_path, low_memory=False)
@@ -15,11 +14,12 @@ published_images_df = pd.read_csv(published_images_path, low_memory=False)
 constituents_df['constituentid'] = constituents_df['constituentid'].astype(str)
 objects_df['objectid'] = objects_df['objectid'].astype(str)
 published_images_df['uuid'] = published_images_df['uuid'].astype(str)
+published_images_df['depictstmsobjectid'] = published_images_df['depictstmsobjectid'].astype(str)
 
 # select and rename columns
 constituents_df = constituents_df[['constituentid', 'preferreddisplayname', 'nationality', 'beginyear', 'endyear']]
 objects_df = objects_df[['objectid', 'title', 'medium', 'dimensions', 'beginyear', 'endyear']]
-published_images_df = published_images_df[['uuid', 'iiifurl']]
+published_images_df = published_images_df[['uuid', 'iiifthumburl', 'depictstmsobjectid']]
 
 # static data fields
 constituents_df['gender_artist'] = ''  # Gender is left blank
@@ -32,13 +32,13 @@ objects_df['country_location'] = 'United States of America'
 # merge dataframes on objectid and constituentid
 merged_df = pd.merge(objects_df, constituents_df, how='left', left_on='objectid', right_on='constituentid')
 
-# merge published_images_df
-final_df = pd.merge(merged_df, published_images_df, how='left', left_on='objectid', right_on='uuid')
+# merge with published_images_df
+final_df = pd.merge(merged_df, published_images_df, how='left', left_on='objectid', right_on='depictstmsobjectid')
 
 # columns for the final csv
 final_columns = [
     'gender_artist', 'preferreddisplayname', 'nationality', 'beginyear_x', 'endyear_x',
-    'iiifurl', 'artworkCreationLocation_artwork', 'dimensions', 'artworkCurrentLocation_artwork',
+    'iiifthumburl', 'artworkCreationLocation_artwork', 'dimensions', 'artworkCurrentLocation_artwork',
     'title', 'medium', 'lon_location', 'lat_location', 'country_location', 'beginyear_y', 'endyear_y'
 ]
 final_df = final_df[final_columns]
@@ -53,4 +53,4 @@ final_df.columns = [
 # export the final dataframe to csv
 final_df.to_csv('data/opendata/final_output.csv', index=False)
 
-print("csv's done")
+print("CSV's done")
