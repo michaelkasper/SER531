@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import {PageLayout} from "./components/PageLayout";
 import {DashboardPage} from "./containers/DashboardPage";
 import {SearchPage} from "./containers/SearchPage";
-import {DetailPage} from "./containers/DetailPage";
+import {ArtworkPage} from "./containers/ArtworkPage";
 
 export const App: React.FC = () => {
     return (
@@ -14,7 +14,7 @@ export const App: React.FC = () => {
 
                 <Route path="/" element={<PageLayout/>}>
                     <Route path="search" element={<SearchPage/>}/>
-                    <Route path="details" element={<DetailPage/>}/>
+                    <Route path="artwork" element={<ArtworkPage/>}/>
                     <Route path="*" element={<DashboardPage/>}/>
                 </Route>
             </Routes>

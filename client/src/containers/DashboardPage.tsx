@@ -1,9 +1,6 @@
 import * as React from "react";
 import {makeStyles} from "tss-react/mui";
-import {useStardog} from "../hooks/useStardog";
-import {ResponseExample} from "../types/ResponsExample";
-import {IconButton, InputBase, Paper, Typography} from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import {Typography} from "@mui/material";
 import {SearchBar} from "../components/SearchBar";
 
 const useStyles = makeStyles()((theme) => ({

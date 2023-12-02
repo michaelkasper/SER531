@@ -15,7 +15,7 @@ export function useStardog<R>(queryString: string, pageSize = 50) {
     const [results, setResults] = useState<Array<R>>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const doQuery = () => {
+    const doQuery = (appendResults = false) => {
         setLoading(true);
         query.execute(
             stardogConnection,
@@ -33,11 +33,11 @@ export function useStardog<R>(queryString: string, pageSize = 50) {
                     return setError(r);
                 }
 
-                if (r.body.results.bindings.length === false) {
-                    hasMore(false);
+                if (r.body.results.bindings.length  < pageSize) {
+                    setHasMore(false);
                 }
 
-                setResults([...results, ...r.body.results.bindings]);
+                setResults([...(appendResults ? results : []), ...r.body.results.bindings]);
             })
             .catch((err) => {
                 setError(err);
@@ -50,12 +50,11 @@ export function useStardog<R>(queryString: string, pageSize = 50) {
     const getNextPage = () => {
         if (hasMore) {
             setPage(page + 1);
-            doQuery();
+            doQuery(true);
         }
     };
 
     useEffect(() => {
-        setResults([]);
         setHasMore(true);
         setError(null);
         setPage(0);
