@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {makeStyles} from "tss-react/mui";
 import {decode as base64Decode} from 'base-64';
 import {useUrlQuery} from "../hooks/useUrlQuery";

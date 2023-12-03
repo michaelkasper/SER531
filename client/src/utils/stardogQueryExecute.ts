@@ -2,8 +2,9 @@ import {config} from "../config";
 import {stardogConnection} from "./stardogConnection";
 import {query} from "stardog";
 
-export const stardogQueryExecute = (queryString: string, params: object) => (
-    query.execute(
+export const stardogQueryExecute = (queryString: string, params: object) => {
+    const startTime = new Date().getTime();
+    return query.execute(
         stardogConnection,
         config.api_database || '',
         queryString,
@@ -13,11 +14,11 @@ export const stardogQueryExecute = (queryString: string, params: object) => (
             ...params
         }
     ).then((response) => {
+        const endTime = new Date().getTime();
         if (response.status !== 200) {
             console.error('response', response);
             throw(response.body);
         }
-        return response;
-    })
-
-)
+        return {response, requestLatency: endTime - startTime};
+    });
+}

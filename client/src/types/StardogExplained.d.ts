@@ -1,4 +1,5 @@
 export type StardogExplained = {
-    queryString: stirng,
-    details: stirng
+    queryString: stirng;
+    details: stirng;
+    requestLatency: number
 }

@@ -1,7 +1,8 @@
-import * as React from "react";
+import React from "react";
 import {makeStyles} from "tss-react/mui";
 import {Typography} from "@mui/material";
 import {SearchBar} from "../components/SearchBar";
+import {Footer} from "../components/Footer";
 
 const useStyles = makeStyles()({
     root: {
@@ -32,22 +33,24 @@ export const DashboardPage = () => {
     const {classes} = useStyles();
 
     return (
-        <div className={classes.root}>
+        <div>
+            <div className={classes.root}>
 
 
-            <div className={classes.header}>
-                <Typography className={classes.logo}>
-                    PR<strong>ONTO</strong>
-                </Typography>
+                <div className={classes.header}>
+                    <Typography className={classes.logo}>
+                        PR<strong>ONTO</strong>
+                    </Typography>
 
-                <Typography className={classes.title}>
-                    Ontology driven art/museum database
-                </Typography>
+                    <Typography className={classes.title}>
+                        Ontology driven art/museum database
+                    </Typography>
+                </div>
+
+
+                <SearchBar/>
             </div>
-
-
-            <SearchBar/>
-
+            <Footer/>
         </div>
     );
 }

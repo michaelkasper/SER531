@@ -5,6 +5,7 @@ import {DashboardPage} from "./containers/DashboardPage";
 import {SearchPage} from "./containers/SearchPage";
 import {ArtworkPage} from "./containers/ArtworkPage";
 import {GlobalStyles} from "tss-react";
+import {AnalysisPage} from "./containers/AnalysisPage";
 
 export const App: React.FC = () => {
     return (
@@ -38,6 +39,7 @@ export const App: React.FC = () => {
                 <Route path="/" element={<PageLayout/>}>
                     <Route path="search" element={<SearchPage/>}/>
                     <Route path="artwork" element={<ArtworkPage/>}/>
+                    <Route path="analysis" element={<AnalysisPage/>}/>
                     <Route path="*" element={<DashboardPage/>}/>
                 </Route>
             </Routes>

@@ -18,7 +18,8 @@ const useStyles = makeStyles()({
     logo: {
         padding: '3px 5px',
         fontSize: '24px !important',
-        width: 200
+        width: 200,
+        cursor: 'pointer',
     },
     title: {
         padding: '3px 5px',

@@ -3,12 +3,8 @@ import {makeStyles} from 'tss-react/mui';
 import {Outlet} from "react-router-dom";
 import {Header} from "./Header";
 import {Link} from "@mui/material";
-import {Footer} from "./Footer";
 
 const useStyles = makeStyles()({
-    body: {
-        marginTop: 20
-    },
     footer: {
         position: 'absolute',
         bottom: 0,
@@ -16,16 +12,12 @@ const useStyles = makeStyles()({
     }
 });
 
-export const PageLayout = () => {
+export const Footer = () => {
     const {classes} = useStyles();
 
     return (
-        <div>
-            <Header/>
-            <div className={classes.body}>
-                <Outlet/>
-            </div>
-            <Footer/>
+        <div className={classes.footer}>
+            <Link href="/analysis" variant="body2">Analysis</Link>
         </div>
     );
 }

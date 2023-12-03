@@ -1,5 +1,5 @@
 import {Card} from "@mui/material";
-import * as React from "react";
+import React from "react";
 import {makeStyles} from "tss-react/mui";
 import {StardogArtwork} from "../types/StardogArtwork";
 import {encode as base64Encode} from "base-64";

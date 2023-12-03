@@ -34,7 +34,7 @@ export const ExplainModal = ({open, onClose, explained, title}: Props) => {
         </Typography>
         <div id={'modal-modal-description'} className={classes.body}>
             <Typography id={"modal-modal-title"} component="h2">
-                Query
+                Query ({explained?.requestLatency}ms)
             </Typography>
             <Divider/>
             <pre className={classes.pre}>{explained?.queryString}</pre>

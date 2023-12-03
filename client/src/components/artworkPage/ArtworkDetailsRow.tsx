@@ -1,5 +1,5 @@
 import {Grid, Typography} from "@mui/material";
-import * as React from "react";
+import React from "react";
 import {makeStyles} from "tss-react/mui";
 
 const useStyles = makeStyles()({
