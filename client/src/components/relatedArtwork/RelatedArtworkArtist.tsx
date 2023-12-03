@@ -1,5 +1,5 @@
 import React, {MouseEvent} from "react";
-import {Button, Link, Typography} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {makeStyles} from "tss-react/mui";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import {ArtworkThumbnail} from "../ArtworkThumbnail";

@@ -34,6 +34,7 @@ export const SearchPage = () => {
     const {classes} = useStyles();
     const navigate = useNavigate();
     const query = useUrlQuery();
+    // eslint-disable-next-line no-useless-escape
     const urlQuerySting = (query.get('q') || '').replace('"', '\"');
 
     const {
@@ -54,6 +55,7 @@ export const SearchPage = () => {
     React.useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading]);
 
     const islastPage = currentPage === lastPage;

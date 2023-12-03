@@ -24,6 +24,7 @@ export const App: React.FC = () => {
                         display: 'none'
                     },
                     '.react-horizontal-scrolling-menu--scroll-container': {
+                        // eslint-disable-next-line no-useless-computed-key
                         ['-ms-overflow-style']: 'none',
                         scrollbarWidth: 'none'
                     }

@@ -47,6 +47,7 @@ export const ArtworkThumbnail = ({artwork}: Props) => {
                     width={200}
                     height={200}
                     src={artwork.artworkImageURL.value}
+                    alt={""}
                 />
                 <div className={classes.titleWrapper}>{artwork.artworkTitle.value}</div>
             </Card>

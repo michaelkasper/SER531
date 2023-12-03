@@ -16,6 +16,7 @@ const useStyles = makeStyles()({
         padding: 4,
         minWidth: 40,
         userSelect: "none",
+        // eslint-disable-next-line no-useless-computed-key
         ['@media (pointer: coarse)']: {
             /* If we detect a touch device without a mouse, do not show buttons; assume user will use swipe gestures to scroll */
             display: 'none'

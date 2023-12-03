@@ -77,6 +77,7 @@ export function useStardog<R>(queryString: string | null, pageSize = 50) {
             setLoading(false);
         })()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [queryString, pageSize]);
 
     return {
