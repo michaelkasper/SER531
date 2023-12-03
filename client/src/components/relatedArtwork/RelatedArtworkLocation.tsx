@@ -1,27 +1,24 @@
 import React from "react";
-import {ArtworkSearchRespons} from "../../types/stardog/ArtworkSearchRespons";
-import {useStardogArtist} from "../../hooks/useStardogArtist";
+import {StardogArtwork} from "../../types/StardogArtwork";
 import {Typography} from "@mui/material";
 import {makeStyles} from "tss-react/mui";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import {ArtworkThumbnail} from "../ArtworkThumbnail";
 import {ScrollBox} from "../ScrollWindow/ScrollBox";
-import {Spinner} from "../Spinner";
 import {useStardogLocation} from "../../hooks/useStardogLocation";
 
-const useStyles = makeStyles()((theme) => ({
-        root: {
-            paddingTop: 20
-        },
-        wrapper: {
-            position: 'relative',
-            height: 210
-        }
-    })
-);
+const useStyles = makeStyles()({
+    root: {
+        paddingTop: 20
+    },
+    wrapper: {
+        position: 'relative',
+        height: 210
+    }
+});
 
 type Props = {
-    artwork: ArtworkSearchRespons;
+    artwork: StardogArtwork;
 }
 
 export const RelatedArtworkLocation = ({artwork}: Props) => {

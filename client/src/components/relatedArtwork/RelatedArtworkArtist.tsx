@@ -1,12 +1,11 @@
 import React from "react";
-import {ArtworkSearchRespons} from "../../types/stardog/ArtworkSearchRespons";
 import {useStardogArtist} from "../../hooks/useStardogArtist";
 import {Typography} from "@mui/material";
 import {makeStyles} from "tss-react/mui";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import {ArtworkThumbnail} from "../ArtworkThumbnail";
 import {ScrollBox} from "../ScrollWindow/ScrollBox";
-import {Spinner} from "../Spinner";
+import {StardogArtwork} from "../../types/StardogArtwork";
 
 const useStyles = makeStyles()((theme) => ({
         root: {
@@ -20,7 +19,7 @@ const useStyles = makeStyles()((theme) => ({
 );
 
 type Props = {
-    artwork: ArtworkSearchRespons;
+    artwork: StardogArtwork;
 }
 
 export const RelatedArtworkArtist = ({artwork}: Props) => {

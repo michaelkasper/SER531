@@ -2,17 +2,15 @@ import {Grid, Typography} from "@mui/material";
 import * as React from "react";
 import {makeStyles} from "tss-react/mui";
 
-const useStyles = makeStyles()((theme) => ({
-        root: {
-            marginBottom: 20
-        },
-        label: {
-            textTransform: 'uppercase',
-        },
-        value: {},
-    })
-);
-
+const useStyles = makeStyles()({
+    root: {
+        marginBottom: 20
+    },
+    label: {
+        textTransform: 'uppercase',
+    },
+    value: {},
+});
 
 type Props = {
     label: string;

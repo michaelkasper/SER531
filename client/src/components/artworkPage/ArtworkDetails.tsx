@@ -1,11 +1,11 @@
 import {Divider, Grid, Typography} from "@mui/material";
 import * as React from "react";
-import {ArtworkSearchRespons} from "../../types/stardog/ArtworkSearchRespons";
+import {StardogArtwork} from "../../types/StardogArtwork";
 import {ArtworkDetailsRow} from "./ArtworkDetailsRow";
 
 
 type Props = {
-    artwork: ArtworkSearchRespons;
+    artwork: StardogArtwork;
 }
 
 export const ArtworkDetails = ({artwork}: Props) => {

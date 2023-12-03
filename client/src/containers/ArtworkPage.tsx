@@ -10,25 +10,24 @@ import {useStardogArtwork} from "../hooks/useStardogArtwork";
 import {RelatedArtworks} from "../components/relatedArtwork/RelatedArtworks";
 import {useNavigate} from "react-router-dom";
 
-const useStyles = makeStyles()((theme) => ({
-        root: {
-            position: "relative",
-            display: 'flex',
-            flexDirection: "column",
-            justifyContent: 'left',
-            alignItems: 'center',
-            textAlign: 'left',
-            padding: '0 100px',
-            marginBottom: 100
-        },
-        backButton: {
-            marginLeft: 10
-        },
-        searchButton: {
-            marginRight: 10
-        },
-    })
-);
+const useStyles = makeStyles()({
+    root: {
+        position: "relative",
+        display: 'flex',
+        flexDirection: "column",
+        justifyContent: 'left',
+        alignItems: 'center',
+        textAlign: 'left',
+        padding: '0 100px',
+        marginBottom: 100
+    },
+    backButton: {
+        marginLeft: 10
+    },
+    searchButton: {
+        marginRight: 10
+    },
+});
 
 
 export const ArtworkPage = () => {

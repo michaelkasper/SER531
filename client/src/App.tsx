@@ -6,7 +6,6 @@ import {SearchPage} from "./containers/SearchPage";
 import {ArtworkPage} from "./containers/ArtworkPage";
 import {GlobalStyles} from "tss-react";
 
-
 export const App: React.FC = () => {
     return (
         <>

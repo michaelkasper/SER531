@@ -1,12 +1,10 @@
-import {Card, Grid, Typography} from "@mui/material";
+import {Card} from "@mui/material";
 import * as React from "react";
-import {makeStyles} from "tss-react/mui";
-import {ArtworkSearchRespons} from "../../types/stardog/ArtworkSearchRespons";
-
+import {StardogArtwork} from "../../types/StardogArtwork";
 
 type Props = {
     itemId?: string;
-    artwork: ArtworkSearchRespons;
+    artwork: StardogArtwork;
 }
 
 export const ArtworkImage = ({artwork}: Props) => {

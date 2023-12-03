@@ -1,8 +1,8 @@
 import {useStardog} from "./useStardog";
-import {ArtworkSearchRespons} from "../types/stardog/ArtworkSearchRespons";
+import {StardogArtwork} from "../types/StardogArtwork";
 
 export function useStardogArtwork(artworkURI: string | null = null) {
-    const {results} = useStardog<ArtworkSearchRespons>(artworkURI ? `
+    const {results} = useStardog<StardogArtwork>(artworkURI ? `
         SELECT 
             ?artworkTitle 
             ?artworkImageURL 

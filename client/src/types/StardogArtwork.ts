@@ -1,4 +1,4 @@
-export type ArtworkSearchRespons = {
+export type StardogArtwork = {
     Artwork: {
         type: "uri"
         value: string

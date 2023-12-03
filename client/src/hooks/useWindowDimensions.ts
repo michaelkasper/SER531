@@ -9,7 +9,6 @@ function getWindowDimensions() {
 }
 
 export function useWindowDimensions() {
-    // the 3rd parameter is optional and only needed for server side rendering
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
     useEffect(() => {

@@ -1,28 +1,23 @@
 import * as React from "react";
 import {makeStyles} from "tss-react/mui";
 import {SearchBar} from "../components/SearchBar";
-import {useStardog} from "../hooks/useStardog";
-import {ArtworkSearchRespons} from "../types/stardog/ArtworkSearchRespons";
 import {useUrlQuery} from "../hooks/useUrlQuery";
 import {useNavigate} from "react-router-dom";
 import {encode as base64Encode} from 'base-64';
 import {useStardogSearch} from "../hooks/useStardogSearch";
-import {useEffect} from "react";
 
-
-const useStyles = makeStyles()((theme) => ({
-        root: {},
-        body: {
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            alignContent: 'flex-start',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            padding: '0 200px'
-        }
-    })
-);
+const useStyles = makeStyles()({
+    root: {},
+    body: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignContent: 'flex-start',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: '0 200px'
+    }
+});
 
 export const SearchPage = () => {
     const {classes} = useStyles();

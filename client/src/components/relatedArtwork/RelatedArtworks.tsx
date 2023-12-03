@@ -1,9 +1,9 @@
 import {RelatedArtworkArtist} from "./RelatedArtworkArtist";
-import {ArtworkSearchRespons} from "../../types/stardog/ArtworkSearchRespons";
+import {StardogArtwork} from "../../types/StardogArtwork";
 import {RelatedArtworkLocation} from "./RelatedArtworkLocation";
 
 type Props = {
-    artwork: ArtworkSearchRespons;
+    artwork: StardogArtwork;
 }
 
 export const RelatedArtworks = ({artwork}: Props) => {
