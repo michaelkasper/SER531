@@ -1,4 +1,4 @@
-import React, {createContext, PropsWithChildren, useContext} from "react";
+import React, {createContext, PropsWithChildren, useContext, useState} from "react";
 import {ExplainModal} from "../components/ExplainModal";
 import {StardogExplained} from "../types/StardogExplained";
 
@@ -12,9 +12,9 @@ export const ExplainModalContext = createContext<Context>({
 
 
 export const ExplainModalProvider = ({children}: PropsWithChildren<unknown>) => {
-    const [explainTitle, setExplainTitle] = React.useState('');
-    const [explain, setExplain] = React.useState<StardogExplained | null>(null);
-    const [open, setOpen] = React.useState(false);
+    const [explainTitle, setExplainTitle] = useState('');
+    const [explain, setExplain] = useState<StardogExplained | null>(null);
+    const [open, setOpen] = useState(false);
 
     const handelOpen = (explainTitle: string, explained: StardogExplained) => {
         setExplainTitle(explainTitle);
