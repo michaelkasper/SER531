@@ -17,6 +17,7 @@ const useStyles = makeStyles()({
         top: 0,
         zIndex: 1,
         mask: 'linear-gradient(to right, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 95%, rgba(0, 0, 0, 0) 0) 100% 50% / 100% 100% repeat-x',
+        // eslint-disable-next-line no-useless-computed-key
         ['-webkit-mask']: 'linear-gradient(to right, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 95%, rgba(0, 0, 0, 0) 0) 100% 50% / 100% 100% repeat-x'
     }
 });

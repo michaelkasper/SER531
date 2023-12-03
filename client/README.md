@@ -27,7 +27,7 @@ nvm use
 > `nvm use` will need to be run everytime you open a new terminal window.
 
 ### Config File
-Locate the `.env.local.sample` file in the root directory and rename it to `.env.local`. After renaming the file add the Stardog password to the new file by replace `PASSWORD_HERE` with the actual password
+Locate the `.env.local.sample` file in the root directory and duplicate it and rename the duplicate to `.env.local`. After renaming the file add the Stardog password to the new file by replace `PASSWORD_HERE` with the actual password
 
 ---
 

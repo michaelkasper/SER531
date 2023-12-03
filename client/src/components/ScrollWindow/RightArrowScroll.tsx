@@ -18,6 +18,7 @@ const useStyles = makeStyles()({
         top: 0,
         zIndex: 1,
         mask: 'linear-gradient(to left, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 95%, rgba(0, 0, 0, 0) 0) 100% 50% / 100% 100% repeat-x',
+        // eslint-disable-next-line no-useless-computed-key
         ['-webkit-mask']: 'linear-gradient(to left, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 95%, rgba(0, 0, 0, 0) 0) 100% 50% / 100% 100% repeat-x'
     }
 });
@@ -44,6 +45,7 @@ export const RightArrowScroll = ({onLoadMore, loadingMore}: Props) => {
                 scrollNext();
             }
         })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [onLoadMore, isLastItemVisible]);
 
     if ((isLastItemVisible && !loadingMore) || items.size === 0) {

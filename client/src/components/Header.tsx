@@ -1,6 +1,6 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
-import {AppBar, Button, Typography} from "@mui/material";
+import {AppBar, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
 const useStyles = makeStyles()({
@@ -9,16 +9,15 @@ const useStyles = makeStyles()({
         justifyContent: 'space-between',
         alignItems: 'left',
         flexDirection: 'column',
-        padding: '0',
+        padding: '0 20px',
         margin: '0',
     },
     bar: {
         backgroundColor: 'white'
     },
     logo: {
-        cursor: 'pointer',
         padding: '3px 5px',
-        fontSize: '36px !important',
+        fontSize: '24px !important',
         width: 200
     },
     title: {
@@ -36,11 +35,9 @@ export const Header: React.FC = () => {
     return (
         <AppBar position="static" color={'inherit'}>
             <div className={classes.root}>
-                <div>
-                    <Typography className={classes.logo} onClick={() => navigate('/')}>
-                        PR<strong>ONTO</strong>
-                    </Typography>
-                </div>
+                <Typography variant={"overline"} className={classes.logo} onClick={() => navigate('/')}>
+                    PR<strong>ONTO</strong>
+                </Typography>
 
                 <Typography className={classes.title}>
                     Ontology driven art/museum database

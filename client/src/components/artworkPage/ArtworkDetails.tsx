@@ -1,5 +1,5 @@
 import React, {MouseEvent} from "react";
-import {Button, Grid, Link, Typography} from "@mui/material";
+import {Button, Grid, Typography} from "@mui/material";
 import {StardogArtwork} from "../../types/StardogArtwork";
 import {ArtworkDetailsRow} from "./ArtworkDetailsRow";
 import {Divider} from "../Divider";
