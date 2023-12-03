@@ -8,6 +8,7 @@ import {ArtworkDetails} from "../components/artworkPage/ArtworkDetails";
 import {ArtworkImage} from "../components/artworkPage/ArtworkImage";
 import {useStardogArtwork} from "../hooks/useStardogArtwork";
 import {RelatedArtworks} from "../components/relatedArtwork/RelatedArtworks";
+import {useNavigate} from "react-router-dom";
 
 const useStyles = makeStyles()((theme) => ({
         root: {
@@ -20,13 +21,19 @@ const useStyles = makeStyles()((theme) => ({
             padding: '0 100px',
             marginBottom: 100
         },
-        backButton: {},
+        backButton: {
+            marginLeft: 10
+        },
+        searchButton: {
+            marginRight: 10
+        },
     })
 );
 
 
 export const ArtworkPage = () => {
     const {classes} = useStyles();
+    const navigate = useNavigate();
     const query = useUrlQuery();
     const urlId = base64Decode(query.get('id') || '');
     const [artworkURI, setArtworkURI] = useState<string>(urlId);
@@ -34,6 +41,10 @@ export const ArtworkPage = () => {
 
     const handelBackButton = () => {
         window.history.back();
+    }
+
+    const handelNewSearchButton = () => {
+        navigate('/');
     }
 
     useEffect(() => {
@@ -44,7 +55,10 @@ export const ArtworkPage = () => {
         <div className={classes.root}>
             <Grid container spacing={2} justifyContent="flex-start">
                 <Grid item xs={12}>
+                    <Button className={classes.searchButton} variant="outlined" onClick={handelNewSearchButton}>New
+                        Search</Button>
                     <Button className={classes.backButton} variant="outlined" onClick={handelBackButton}>BACK</Button>
+
                 </Grid>
                 {artwork && <>
                     <Grid item xs={4}>
