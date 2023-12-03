@@ -1,7 +1,5 @@
 import React from "react";
 import {makeStyles} from 'tss-react/mui';
-import {Outlet} from "react-router-dom";
-import {Header} from "./Header";
 import {Link} from "@mui/material";
 
 const useStyles = makeStyles()({
