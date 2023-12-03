@@ -1,6 +1,6 @@
+import React, {useEffect} from "react";
 import {IconButton, InputBase, Paper} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import * as React from "react";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useUrlQuery} from "../hooks/useUrlQuery";
@@ -12,7 +12,8 @@ type Props = {
 export const SearchBar = ({width = 600}: Props) => {
     const navigate = useNavigate();
     const query = useUrlQuery();
-    const [searchString, setSearchString] = useState<string>(query.get('q') || '');
+    const urlQuerySting = query.get('q') || '';
+    const [searchString, setSearchString] = useState<string>(urlQuerySting);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -31,6 +32,10 @@ export const SearchBar = ({width = 600}: Props) => {
             navigate('/search?q=' + searchString);
         }
     }
+
+    useEffect(() => {
+        setSearchString(urlQuerySting)
+    }, [urlQuerySting]);
 
     return (
         <Paper

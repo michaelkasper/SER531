@@ -22,5 +22,21 @@ export type ArtworkSearchRespons = {
     artworkCreationLocation?: {
         type: "literal"
         value: string
+    },
+    Artist: {
+        type: "uri"
+        value: string
+    },
+    artistName: {
+        type: "literal"
+        value: string
+    },
+    Location: {
+        type: "uri"
+        value: string
+    },
+    country: {
+        type: "literal"
+        value: string
     }
 }

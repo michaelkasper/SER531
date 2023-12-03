@@ -8,14 +8,18 @@ const stardogConnection = new Connection({
     endpoint: config.api_endpoint || '',
 });
 
-export function useStardog<R>(queryString: string, pageSize = 50) {
+export function useStardog<R>(queryString: string | null, pageSize = 50) {
     const [error, setError] = useState<any>(null);
     const [hasMore, setHasMore] = useState<any>(true);
-    const [page, setPage] = useState<any>(0);
+    const [currentPage, setCurrentPage] = useState<any>(0);
+    const [lastPage, setLastPage] = useState<any>(0);
     const [results, setResults] = useState<Array<R>>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const doQuery = (appendResults = false) => {
+    const doQuery = (pageNumber = 0, appendResults = false) => {
+        if (!queryString) {
+            return;
+        }
         setLoading(true);
         query.execute(
             stardogConnection,
@@ -25,7 +29,7 @@ export function useStardog<R>(queryString: string, pageSize = 50) {
             {
                 limit: pageSize,
                 reasoning: true,
-                offset: page
+                offset: pageNumber * pageSize
             }
         )
             .then((r) => {
@@ -33,10 +37,14 @@ export function useStardog<R>(queryString: string, pageSize = 50) {
                     return setError(r);
                 }
 
-                if (r.body.results.bindings.length  < pageSize) {
+                if (r.body.results.bindings.length < pageSize) {
                     setHasMore(false);
+                    setLastPage(pageNumber);
+                } else {
+                    setLastPage(pageNumber + 1);
                 }
 
+                setCurrentPage(pageNumber);
                 setResults([...(appendResults ? results : []), ...r.body.results.bindings]);
             })
             .catch((err) => {
@@ -49,24 +57,23 @@ export function useStardog<R>(queryString: string, pageSize = 50) {
 
     const getNextPage = () => {
         if (hasMore) {
-            setPage(page + 1);
-            doQuery(true);
+            doQuery(currentPage + 1, true);
         }
     };
 
     useEffect(() => {
         setHasMore(true);
         setError(null);
-        setPage(0);
-        doQuery();
+        doQuery(0, false);
     }, [queryString, pageSize]);
 
     return {
         results,
         loading,
         error,
-        currentPage: (page + 1),
-        lastPage: hasMore ? (page + 2) : (page + 1),
+        currentPage: (currentPage + 1),
+        lastPage: (lastPage + 1),
+        currentIsLastPage: currentPage === lastPage,
         getNextPage
     };
 }

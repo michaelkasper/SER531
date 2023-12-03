@@ -6,6 +6,8 @@ import {ArtworkSearchRespons} from "../types/stardog/ArtworkSearchRespons";
 import {useUrlQuery} from "../hooks/useUrlQuery";
 import {useNavigate} from "react-router-dom";
 import {encode as base64Encode} from 'base-64';
+import {useStardogSearch} from "../hooks/useStardogSearch";
+import {useEffect} from "react";
 
 
 const useStyles = makeStyles()((theme) => ({
@@ -26,25 +28,14 @@ export const SearchPage = () => {
     const {classes} = useStyles();
     const navigate = useNavigate();
     const query = useUrlQuery();
-    const searchString = (query.get('q') || '').replace('"', '\"');
+    const urlQuerySting = (query.get('q') || '').replace('"', '\"');
+
     const {
         results,
         getNextPage,
         currentPage,
         lastPage
-    } = useStardog<ArtworkSearchRespons>(`
-        SELECT ?Artwork ?artworkTitle ?artworkImageURL ?mediaType ?dimension ?artworkCreationLocation
-        WHERE {
-            ?Artwork a :Artwork .
-            ?Artwork :artworkTitle ?artworkTitle .
-            ?Artwork :artworkImageURL ?artworkImageURL .
-            OPTIONAL { ?Artwork :dimension ?dimension } .
-            OPTIONAL { ?Artwork :mediaType ?mediaType } .
-            OPTIONAL { ?Artwork :artworkCreationLocation ?artworkCreationLocation } .
-            OPTIONAL { ?Artwork :artworkCurrentLocation ?artworkCurrentLocation } .
-            FILTER(REGEX(STR(?artworkTitle), "${searchString}", "i"))
-        }
-    `);
+    } = useStardogSearch(urlQuerySting);
     const islastPage = currentPage === lastPage;
 
     const onArtworkClick = (artworkURI: string) => {
@@ -63,12 +54,7 @@ export const SearchPage = () => {
                             <div>
                                 <img width={100} src={result.artworkImageURL.value}/>
                             </div>
-                            <div>
-                                <div>{result?.artworkTitle.value}</div>
-                                <div>{result?.mediaType?.value}</div>
-                                <div>{result?.dimension?.value}</div>
-                                <div>{result?.artworkCreationLocation?.value}</div>
-                            </div>
+                            <div>{result?.artworkTitle.value}</div>
                         </div>
                     )
                 })}

@@ -2,18 +2,25 @@ import * as React from "react";
 import {makeStyles} from "tss-react/mui";
 import {decode as base64Decode} from 'base-64';
 import {useUrlQuery} from "../hooks/useUrlQuery";
-import {useState} from "react";
-import {useStardog} from "../hooks/useStardog";
-import {ArtworkSearchRespons} from "../types/stardog/ArtworkSearchRespons";
+import {useEffect, useState} from "react";
+import {Button, Divider, Grid} from "@mui/material";
+import {ArtworkDetails} from "../components/artworkPage/ArtworkDetails";
+import {ArtworkImage} from "../components/artworkPage/ArtworkImage";
+import {useStardogArtwork} from "../hooks/useStardogArtwork";
+import {RelatedArtworks} from "../components/relatedArtwork/RelatedArtworks";
 
 const useStyles = makeStyles()((theme) => ({
         root: {
             position: "relative",
             display: 'flex',
             flexDirection: "column",
-            justifyContent: 'center',
-            alignItems: 'center'
-        }
+            justifyContent: 'left',
+            alignItems: 'center',
+            textAlign: 'left',
+            padding: '0 100px',
+            marginBottom: 100
+        },
+        backButton: {},
     })
 );
 
@@ -21,37 +28,38 @@ const useStyles = makeStyles()((theme) => ({
 export const ArtworkPage = () => {
     const {classes} = useStyles();
     const query = useUrlQuery();
-    const [artworkURI] = useState<string>(base64Decode(query.get('id') || ''));
+    const urlId = base64Decode(query.get('id') || '');
+    const [artworkURI, setArtworkURI] = useState<string>(urlId);
+    const artwork = useStardogArtwork(artworkURI);
 
-    const {results} = useStardog<ArtworkSearchRespons>(`
-        SELECT ?artworkTitle ?artworkImageURL ?mediaType ?dimension ?artworkCreationLocation
-        WHERE {
-            <${artworkURI}> a :Artwork .
-            <${artworkURI}> :artworkTitle ?artworkTitle .
-            <${artworkURI}> :artworkImageURL ?artworkImageURL .
-            OPTIONAL { <${artworkURI}> :dimension ?dimension } .
-            OPTIONAL { <${artworkURI}> :mediaType ?mediaType } .
-            OPTIONAL { <${artworkURI}> :artworkCreationLocation ?artworkCreationLocation } .
-            OPTIONAL { <${artworkURI}> :artworkCurrentLocation ?artworkCurrentLocation } .
-        }
-    `);
-    const result = results?.[0];
+    const handelBackButton = () => {
+        window.history.back();
+    }
+
+    useEffect(() => {
+        setArtworkURI(urlId)
+    }, [urlId]);
 
     return (
         <div className={classes.root}>
-            {JSON.stringify(result)}
-
-            {result && <div>
-                <div>
-                    <img width={100} src={result.artworkImageURL.value}/>
-                </div>
-                <div>
-                    <div>{result?.artworkTitle.value}</div>
-                    <div>{result?.mediaType?.value}</div>
-                    <div>{result?.dimension?.value}</div>
-                    <div>{result?.artworkCreationLocation?.value}</div>
-                </div>
-            </div>}
+            <Grid container spacing={2} justifyContent="flex-start">
+                <Grid item xs={12}>
+                    <Button className={classes.backButton} variant="outlined" onClick={handelBackButton}>BACK</Button>
+                </Grid>
+                {artwork && <>
+                    <Grid item xs={4}>
+                        <ArtworkImage artwork={artwork}/>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <ArtworkDetails artwork={artwork}/>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Divider light/>
+                        <RelatedArtworks artwork={artwork}/>
+                    </Grid>
+                </>
+                }
+            </Grid>
 
         </div>
     );
