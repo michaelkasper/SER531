@@ -16,6 +16,7 @@ const useStyles = makeStyles()((theme) => ({
             backgroundColor: 'white'
         },
         logo: {
+            cursor: 'pointer',
             padding: '3px 5px',
             fontSize: '36px !important',
             width: 200
@@ -31,12 +32,13 @@ const useStyles = makeStyles()((theme) => ({
 
 export const Header: React.FC = () => {
     const {classes} = useStyles();
+    const navigate = useNavigate();
 
     return (
         <AppBar position="static" color={'inherit'}>
             <div className={classes.root}>
                 <div>
-                    <Typography className={classes.logo}>
+                    <Typography className={classes.logo} onClick={() => navigate('/')}>
                         PR<strong>ONTO</strong>
                     </Typography>
                 </div>
