@@ -1,8 +1,5 @@
-import {useStardog} from "./useStardog";
-import {StardogArtwork} from "../types/StardogArtwork";
-
-export function useStardogLocation(locationURI: string) {
-    return useStardog<StardogArtwork>(`
+export const stardogArtistArtworksQuery = (artistURI: string) => {
+    return `
         SELECT 
             ?Artwork 
             ?artworkTitle 
@@ -10,24 +7,23 @@ export function useStardogLocation(locationURI: string) {
             ?mediaType 
             ?dimension 
             ?artworkCreationLocation 
-            ?Artist
             ?artistName
+            ?Location
             ?country
         WHERE {
-            <${locationURI}> a :Location .
-            <${locationURI}> :country ?country .
-            ?Artwork :hasLocation <${locationURI}> .
+            <${artistURI}> a :Artist .
+            <${artistURI}> :isArtistOf ?Artwork .
             ?Artwork a :Artwork .
             ?Artwork :artworkTitle ?artworkTitle .
             ?Artwork :artworkImageURL ?artworkImageURL .
             OPTIONAL { ?Artwork :dimension ?dimension } .
             OPTIONAL { ?Artwork :mediaType ?mediaType } .
             OPTIONAL { ?Artwork :artworkCreationLocation ?artworkCreationLocation } .
-            OPTIONAL { 
-                ?Artwork :isArtworkOf ?Artist .
-                ?Artist a :Artist .
-                ?Artist :name ?artistName .
+            OPTIONAL {
+                ?Artwork :hasLocation ?Location .
+                ?Location a :Location .
+                ?Location :country ?country .
             } .
-        }
-    `);
+        }  
+    `;
 }

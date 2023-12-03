@@ -5,6 +5,7 @@ import {BrowserRouter} from "react-router-dom";
 import {CacheProvider} from '@emotion/react';
 import createCache from '@emotion/cache';
 import {ThemeProvider} from '@mui/material/styles';
+import {ExplainModalProvider} from "./hooks/useExplainModal";
 
 export const muiCache = createCache({
     key: 'mui',
@@ -15,9 +16,11 @@ ReactDOM.render(
     <React.StrictMode>
         <CacheProvider value={muiCache}>
             <ThemeProvider theme={{}}>
-                <BrowserRouter>
-                    <App/>
-                </BrowserRouter>
+                <ExplainModalProvider>
+                    <BrowserRouter>
+                        <App/>
+                    </BrowserRouter>
+                </ExplainModalProvider>
             </ThemeProvider>
         </CacheProvider>
     </React.StrictMode>,

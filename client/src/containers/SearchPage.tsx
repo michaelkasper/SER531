@@ -4,7 +4,9 @@ import {SearchBar} from "../components/SearchBar";
 import {useUrlQuery} from "../hooks/useUrlQuery";
 import {useNavigate} from "react-router-dom";
 import {encode as base64Encode} from 'base-64';
-import {useStardogSearch} from "../hooks/useStardogSearch";
+import { useStardog } from "../hooks/useStardog";
+import {stardogArtworksSearchQuery} from "../api/stardogArtworksSearchQuery";
+import {StardogArtwork} from "../types/StardogArtwork";
 
 const useStyles = makeStyles()({
     root: {},
@@ -30,7 +32,7 @@ export const SearchPage = () => {
         getNextPage,
         currentPage,
         lastPage
-    } = useStardogSearch(urlQuerySting);
+    } = useStardog<StardogArtwork>(stardogArtworksSearchQuery(urlQuerySting));
     const islastPage = currentPage === lastPage;
 
     const onArtworkClick = (artworkURI: string) => {

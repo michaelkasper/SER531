@@ -6,9 +6,11 @@ import {useEffect, useState} from "react";
 import {Button, Divider, Grid} from "@mui/material";
 import {ArtworkDetails} from "../components/artworkPage/ArtworkDetails";
 import {ArtworkImage} from "../components/artworkPage/ArtworkImage";
-import {useStardogArtwork} from "../hooks/useStardogArtwork";
 import {RelatedArtworks} from "../components/relatedArtwork/RelatedArtworks";
 import {useNavigate} from "react-router-dom";
+import {useStardog} from "../hooks/useStardog";
+import {stardogArtworkQuery} from "../api/stardogArtworkQuery";
+import {StardogArtwork} from "../types/StardogArtwork";
 
 const useStyles = makeStyles()({
     root: {
@@ -36,7 +38,9 @@ export const ArtworkPage = () => {
     const query = useUrlQuery();
     const urlId = base64Decode(query.get('id') || '');
     const [artworkURI, setArtworkURI] = useState<string>(urlId);
-    const artwork = useStardogArtwork(artworkURI);
+    const {results, explained} = useStardog<StardogArtwork>(artworkURI ? stardogArtworkQuery(artworkURI) : null);
+
+    const artwork = results?.[0];
 
     const handelBackButton = () => {
         window.history.back();
@@ -64,7 +68,7 @@ export const ArtworkPage = () => {
                         <ArtworkImage artwork={artwork}/>
                     </Grid>
                     <Grid item xs={8}>
-                        <ArtworkDetails artwork={artwork}/>
+                        <ArtworkDetails artwork={artwork} explained={explained}/>
                     </Grid>
                     <Grid item xs={12}>
                         <Divider light/>

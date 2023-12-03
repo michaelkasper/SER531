@@ -7,11 +7,10 @@ type Props = {
 }
 
 export const RelatedArtworks = ({artwork}: Props) => {
-
     return (
-        <div>
+        <>
             <RelatedArtworkArtist artwork={artwork}/>
             <RelatedArtworkLocation artwork={artwork}/>
-        </div>
+        </>
     );
 }

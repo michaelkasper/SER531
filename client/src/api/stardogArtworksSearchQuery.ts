@@ -1,8 +1,5 @@
-import {useStardog} from "./useStardog";
-import {StardogArtwork} from "../types/StardogArtwork";
-
-export function useStardogSearch(searchString: string) {
-    return useStardog<StardogArtwork>(`
+export const stardogArtworksSearchQuery = (searchString: string) => {
+    return `
         SELECT ?Artwork ?artworkTitle ?artworkImageURL ?mediaType ?dimension ?artworkCreationLocation
         WHERE {
             ?Artwork a :Artwork .
@@ -10,5 +7,5 @@ export function useStardogSearch(searchString: string) {
             ?Artwork :artworkImageURL ?artworkImageURL .
             FILTER(REGEX(STR(?artworkTitle), "${searchString}", "i"))
         }
-    `);
+    `;
 }
