@@ -12,11 +12,11 @@ const useStyles = makeStyles()({
 
 type Props = {
     children: React.ReactElement<{ itemId: string }> | React.ReactElement<{ itemId: string }>[];
-    onLoadMore?: () => void;
+    onLoadMore?: () => Promise<void>;
     loadingMore?: boolean;
 }
 
-export const ScrollBox = ({children, onLoadMore = () => null, loadingMore}: Props) => {
+export const ScrollBox = ({children, onLoadMore = () => Promise.resolve(), loadingMore}: Props) => {
     const {classes} = useStyles();
     return (
         <div className={classes.wrapper}>

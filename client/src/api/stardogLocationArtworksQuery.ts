@@ -26,5 +26,6 @@ export const stardogLocationArtworksQuery = (locationURI: string) => {
                 ?Artist :name ?artistName .
             } .
         }
+        LIMIT 50
     `;
 }

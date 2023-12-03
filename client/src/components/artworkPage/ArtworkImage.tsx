@@ -8,9 +8,18 @@ import {makeStyles} from "tss-react/mui";
 
 const useStyles = makeStyles()({
     card: {
-        cursor: 'pointer'
+        cursor: 'pointer',
+        padding: 10
     },
     img: {
+        display: 'block',
+        width: 400,
+        height: 400,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center'
+    },
+    imgModal: {
         display: 'block',
         width: '65vw',
         height: '65vh',
@@ -31,21 +40,22 @@ export const ArtworkImage = ({artwork}: Props) => {
 
     return <>
         <Card
-            sx={{maxWidth: 400, padding: 0, margin: 0}}
+            sx={{maxWidth: 420, maxHeight: 420, padding: 0, margin: 0}}
             onClick={() => setOpenModal(true)}
             className={classes.card}
         >
-            <img
-                width={400}
-                height={'100%'}
-                src={artwork.artworkImageURL.value}
+            <div
+                className={classes.img}
+                style={{
+                    backgroundImage: `url(${artwork.artworkImageURL.value})`
+                }}
             />
         </Card>
         <Modal open={openModal} onClose={() => setOpenModal(false)}>
             <div id={'modal-modal-description'}>
                 <Card sx={{maxWidth: '100%', maxHeight: '100%', padding: 0, margin: 0}}>
                     <div
-                        className={classes.img}
+                        className={classes.imgModal}
                         style={{
                             backgroundImage: `url(${artwork.artworkImageURL.value})`
                         }}

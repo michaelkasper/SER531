@@ -6,11 +6,12 @@ import {useEffect, useState} from "react";
 import {Button, Divider, Grid} from "@mui/material";
 import {ArtworkDetails} from "../components/artworkPage/ArtworkDetails";
 import {ArtworkImage} from "../components/artworkPage/ArtworkImage";
-import {RelatedArtworks} from "../components/relatedArtwork/RelatedArtworks";
 import {useNavigate} from "react-router-dom";
 import {useStardog} from "../hooks/useStardog";
 import {stardogArtworkQuery} from "../api/stardogArtworkQuery";
 import {StardogArtwork} from "../types/StardogArtwork";
+import {RelatedArtworkArtist} from "../components/relatedArtwork/RelatedArtworkArtist";
+import {RelatedArtworkLocation} from "../components/relatedArtwork/RelatedArtworkLocation";
 
 const useStyles = makeStyles()({
     root: {
@@ -72,7 +73,15 @@ export const ArtworkPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Divider light/>
-                        <RelatedArtworks artwork={artwork}/>
+                        {
+                            artwork?.Artist?.value &&
+                            <RelatedArtworkArtist artist={artwork?.Artist?.value}/>
+                        }
+
+                        {
+                            artwork?.Location?.value &&
+                            <RelatedArtworkLocation location={artwork?.Location?.value}/>
+                        }
                     </Grid>
                 </>
                 }

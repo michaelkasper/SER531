@@ -23,7 +23,7 @@ const useStyles = makeStyles()({
 });
 
 type Props = {
-    onLoadMore: () => void;
+    onLoadMore: () => Promise<void>;
     loadingMore?: boolean;
 }
 
@@ -31,10 +31,19 @@ export const RightArrowScroll = ({onLoadMore, loadingMore}: Props) => {
     const {classes} = useStyles();
     const {isLastItemVisible, scrollNext, items} = useContext(VisibilityContext);
 
-    useEffect(() => {
-        if (isLastItemVisible) {
-            onLoadMore();
+    const handelOnClick = () => {
+        if (!loadingMore) {
+            scrollNext();
         }
+    }
+
+    useEffect(() => {
+        (async () => {
+            if (isLastItemVisible) {
+                await onLoadMore();
+                scrollNext();
+            }
+        })();
     }, [onLoadMore, isLastItemVisible]);
 
     if ((isLastItemVisible && !loadingMore) || items.size === 0) {
@@ -44,7 +53,7 @@ export const RightArrowScroll = ({onLoadMore, loadingMore}: Props) => {
     return (
         <>
             <div className={classes.fade}/>
-            <ArrowScroll onClick={() => scrollNext()} className={classes.rightButton}>
+            <ArrowScroll onClick={handelOnClick} className={classes.rightButton}>
                 {!loadingMore && <ArrowForwardIosIcon/>}
                 {loadingMore && <Spinner/>}
             </ArrowScroll>

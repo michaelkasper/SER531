@@ -20,10 +20,10 @@ const useStyles = makeStyles()({
 });
 
 type Props = {
-    artwork: StardogArtwork;
+    location: string;
 }
 
-export const RelatedArtworkLocation = ({artwork}: Props) => {
+export const RelatedArtworkLocation = ({location}: Props) => {
     const {classes} = useStyles();
     const {openExplain} = useExplainModal();
     const {
@@ -31,7 +31,7 @@ export const RelatedArtworkLocation = ({artwork}: Props) => {
         getNextPage,
         loading,
         explained
-    } = useStardog<StardogArtwork>(stardogLocationArtworksQuery(artwork?.Location?.value));
+    } = useStardog<StardogArtwork>(stardogLocationArtworksQuery(location));
 
     const onExplainSPARQL = (e: MouseEvent) => {
         e.preventDefault();

@@ -21,10 +21,10 @@ const useStyles = makeStyles()((theme) => ({
 );
 
 type Props = {
-    artwork: StardogArtwork;
+    artist: string;
 }
 
-export const RelatedArtworkArtist = ({artwork}: Props) => {
+export const RelatedArtworkArtist = ({artist}: Props) => {
     const {classes} = useStyles();
     const {openExplain} = useExplainModal();
     const {
@@ -32,7 +32,7 @@ export const RelatedArtworkArtist = ({artwork}: Props) => {
         getNextPage,
         loading,
         explained
-    } = useStardog<StardogArtwork>(stardogArtistArtworksQuery(artwork?.Artist?.value));
+    } = useStardog<StardogArtwork>(stardogArtistArtworksQuery(artist));
 
     const onExplainSPARQL = (e: MouseEvent) => {
         e.preventDefault();

@@ -7,5 +7,6 @@ export const stardogArtworksSearchQuery = (searchString: string) => {
             ?Artwork :artworkImageURL ?artworkImageURL .
             FILTER(REGEX(STR(?artworkTitle), "${searchString}", "i"))
         }
+        LIMIT 50
     `;
 }

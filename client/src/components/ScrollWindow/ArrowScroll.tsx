@@ -1,6 +1,7 @@
 import React, {PropsWithChildren} from "react";
 import {makeStyles} from "tss-react/mui";
 import classNames from "classnames";
+import {Button} from "@mui/material";
 
 const useStyles = makeStyles()({
     button: {
@@ -12,6 +13,8 @@ const useStyles = makeStyles()({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        padding: 4,
+        minWidth: 40,
         userSelect: "none",
         ['@media (pointer: coarse)']: {
             /* If we detect a touch device without a mouse, do not show buttons; assume user will use swipe gestures to scroll */
@@ -28,11 +31,13 @@ type Props = {
 export const ArrowScroll = ({children, onClick, className}: PropsWithChildren<Props>) => {
     const {classes} = useStyles();
     return (
-        <button
+        <Button
+            size="small"
+            variant="contained"
             className={classNames(classes.button, className)}
             onClick={onClick}
         >
             {children}
-        </button>
+        </Button>
     );
 }

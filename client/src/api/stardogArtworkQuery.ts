@@ -28,5 +28,6 @@ export const stardogArtworkQuery = (artworkURI: string) => {
             ?Location :country ?country .
         } .
     }
+    LIMIT 1
 `;
 }

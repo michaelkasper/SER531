@@ -20,7 +20,7 @@ export function useStardog<R>(queryString: string | null, pageSize = 50) {
         try {
             const response = await stardogQueryExecute(queryString, {
                 limit: pageSize,
-                reasoning: true,
+                reasoning: false,
                 offset: pageNumber * pageSize
             });
 
